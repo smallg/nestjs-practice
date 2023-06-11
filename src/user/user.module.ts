@@ -2,13 +2,20 @@ import {
   MiddlewareConsumer,
   Module,
   NestModule,
-  RequestMethod,
+  // RequestMethod,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { Logger } from 'src/middlewares/logger/logger.middleware';
+import { MongooseModule } from '@nestjs/mongoose';
+import { UserSchema } from './user.schema';
+
+const UserTable = MongooseModule.forFeature([
+  { name: 'Users', schema: UserSchema },
+]);
 
 @Module({
+  imports: [UserTable],
   controllers: [UserController],
   providers: [UserService],
 })

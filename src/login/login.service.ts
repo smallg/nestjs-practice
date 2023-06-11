@@ -5,6 +5,7 @@ import { UpdateLoginDto } from './dto/update-login.dto';
 @Injectable()
 export class LoginService {
   create(createLoginDto: CreateLoginDto) {
+    console.log('createLoginDto', createLoginDto);
     return 'This action adds a new login';
   }
 

@@ -36,7 +36,7 @@ export class UserController {
   @ApiOperation({ summary: 'create user', description: 'xxx' })
   create(@Body() createUserDto: CreateUserDto) {
     // @Body('name') get one property
-    console.log(createUserDto);
+    console.log('controller', createUserDto);
     return this.userService.create(createUserDto);
   }
 
