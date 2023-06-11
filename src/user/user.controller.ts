@@ -18,19 +18,22 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 // @Controller({
 //   path: 'user',
 //   version: '1',
 // })
 @Controller('user')
+@ApiTags('user api')
 export class UserController {
   constructor(
     private readonly userService: UserService,
     @Inject('Config') private readonly base: string,
-  ) {}
+  ) { }
 
   @Post()
+  @ApiOperation({ summary: 'create user', description: 'xxx' })
   create(@Body() createUserDto: CreateUserDto) {
     // @Body('name') get one property
     console.log(createUserDto);
@@ -38,6 +41,8 @@ export class UserController {
   }
 
   @Get()
+  @ApiQuery({ name: 'page', description: 'pagination' })
+  @ApiResponse({ status: 200, description: 'ok' })
   findAll(@Request() req, @Query() query) {
     console.log(this.base);
     console.log(req.query, query);
@@ -45,6 +50,7 @@ export class UserController {
   }
 
   @Get(':id')
+  @ApiParam({ name: 'id', description: 'xxx', required: true })
   @Version('1')
   findOne(@Param('id', ParseIntPipe) id: string) {
     return this.userService.findOne(+id);

@@ -14,8 +14,10 @@ import { CreateGuardDto } from './dto/create-guard.dto';
 import { UpdateGuardDto } from './dto/update-guard.dto';
 import { RoleGuard } from './role/role.guard';
 import { ReqUrl, Role } from './role/role.decorator';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('guard')
+@ApiTags('guard api')
 @UseGuards(RoleGuard)
 export class GuardController {
   constructor(private readonly guardService: GuardService) {}
